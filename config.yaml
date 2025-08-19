@@ -1,0 +1,28 @@
+report:
+  method: webhook
+  webhook:
+    # use your real HA webhook URL, or set HA_WEBHOOK_URL env var and use ${HA_WEBHOOK_URL}
+    url: "http://192.168.0.20:8123/api/webhook/-Su6Jkokz0muUT1CmwN9E5LB3"
+
+sites:
+  - name: Helijobs Oceania pilots
+    # page 1 url:
+    url: "https://helijobs.net/category/pilot/?tag=oceania"
+    # pattern that produces page 2..N:
+    page_pattern: "https://helijobs.net/category/pilot/page/{page}/?tag=oceania"
+    daily_pages: 1        # normal runs
+    backfill_pages: 5     # used with --backfill
+    item_selector: "article"
+    title_selector: "h2.entry-title a"
+    link_selector: "h2.entry-title a"
+    date_selector: "time.entry-date"
+    date_attr: "datetime"
+    year_filter: 2025     # keep if you only want 2025
+    title_keywords_all: ["australia"]   # title must contain ALL
+ # - name: Another Board
+  #  url: "https://another.com/jobs"
+   # item_selector: "li.result"
+    #title_selector: "h3 a"
+   # link_selector: "h3 a"
+   # include_keywords: ["mechanical", "cad"]
+   # exclude_keywords: []
