@@ -1,33 +1,25 @@
-# Use Home Assistant base image
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:latest
-FROM ${BUILD_FROM}
+FROM ghcr.io/home-assistant/amd64-base:latest
 
-# Install system dependencies for Python and lxml
+# Install system dependencies for lxml
 RUN apk add --no-cache python3 py3-pip libxml2 libxslt && \
     apk add --no-cache --virtual .build-deps gcc musl-dev libxml2-dev libxslt-dev
 
-# Create a virtual environment for Python packages
+WORKDIR /app
+
+# Create a virtual environment
 RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# Set workdir
-WORKDIR /app
-
-# Install Python dependencies inside the venv
+# Copy requirements and install into venv
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app files
-COPY api.py scraper.py run.sh ./
-RUN chmod +x /app/run.sh
+# Copy app source
+COPY api.py scraper.py /app/
 
-# Clean up build dependencies
+# Clean up build deps
 RUN apk del .build-deps
 
-# Expose port for API
 EXPOSE 8001
-ENV PYTHONUNBUFFERED=1
 
-# Start the service
-CMD ["/venv/bin/uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8001"]
-
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8001"]
