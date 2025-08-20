@@ -9,6 +9,18 @@ DB_PATH = os.path.join(BASE_DIR, "jobs.db")
 
 CONTROL_CHARS_RE = re.compile(r"[\u0000-\u001F\u007F\u200B\u200E\u200F\u202A-\u202E]")
 
+import json
+
+OPTIONS_PATH = "/data/options.json"
+
+def load_options():
+    try:
+        with open(OPTIONS_PATH) as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+
 def clean_text(s):
     if not s: return s
     import unicodedata
@@ -78,6 +90,7 @@ def parse_page(url, item_sel, title_sel, link_sel, date_sel, date_attr, year_fil
     return rows
 
 def scrape(pages, year_filter):
+    opts = load_options()
     # always record only Australia titles in DB
     must_all = ["australia"]
     item_sel = "article"
@@ -86,9 +99,12 @@ def scrape(pages, year_filter):
     date_sel = "time.entry-date"
     date_attr = "datetime"
 
-    source_url = os.environ.get("JW_SOURCE_URL", "https://helijobs.net/category/pilot/?tag=oceania")
-    page_pattern = os.environ.get("JW_PAGE_PATTERN", "https://helijobs.net/category/pilot/page/{page}/?tag=oceania")
 
+    source_url = opts.get("source_url", "https://helijobs.net/category/pilot/?tag=oceania")
+    page_pattern = opts.get("page_pattern", "https://helijobs.net/category/pilot/page/{page}/?tag=oceania")
+    year_filter = opts.get("year_filter", 2025)
+    pages = int(opts.get("pages_daily", 1))
+    
     urls = [source_url] + [page_pattern.format(page=i) for i in range(2, pages+1)]
     all_rows = []
     for u in urls:
