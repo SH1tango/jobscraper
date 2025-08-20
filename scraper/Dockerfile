@@ -6,13 +6,13 @@ RUN apk add --no-cache python3 py3-pip libxml2 libxslt && \
 
 WORKDIR /app
 
-# Create a virtual environment
+# Create a dedicated virtual environment
 RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 
-# Copy requirements and install into venv
+# Copy requirements and install inside venv
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Copy app source
 COPY api.py scraper.py /app/
@@ -22,4 +22,4 @@ RUN apk del .build-deps
 
 EXPOSE 8001
 
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["/venv/bin/uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8001"]
