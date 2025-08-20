@@ -18,7 +18,7 @@ RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
 COPY api.py scraper.py /app/
 
 # s6 scripts
-COPY rootfs/ /               # copies cont-init and services.d into place
+COPY rootfs/ /
 
 # cleanup
 RUN apk del .build-deps
