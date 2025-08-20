@@ -1,5 +1,5 @@
 name: JobWatcher
-version: "0.1.4"
+version: "0.1.5"
 slug: jobwatcher
 description: Serve jobs.db through a FastAPI and scrape on demand
 arch:
