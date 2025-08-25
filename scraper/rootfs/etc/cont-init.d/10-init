@@ -1,3 +1,2 @@
 #!/usr/bin/with-contenv sh
-# create persistent dir for the DB
 mkdir -p /config/jobwatcher
