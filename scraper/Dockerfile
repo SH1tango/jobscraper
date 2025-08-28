@@ -24,3 +24,6 @@ RUN chmod +x /etc/services.d/jobwatcher/run
 
 RUN head -1 /etc/services.d/jobwatcher/run && \
     ls -l /etc/services.d/jobwatcher/run
+
+RUN echo "== run.sh head ==" && head -5 /etc/services.d/jobwatcher/run
+RUN echo "== run.sh perms ==" && ls -l /etc/services.d/jobwatcher/
