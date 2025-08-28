@@ -1,17 +1,13 @@
 name: JobWatcher
-version: "0.1.36"
+version: "0.1.37"
 slug: jobwatcher
 description: Serve jobs.db through a FastAPI and scrape on demand
 arch:
   - amd64
   - aarch64
-init: false
 startup: services
 boot: auto
 ports:
   8001/tcp: 8001
 options: {}
 schema: {}
-map:
-  - homeassistant_config:rw 
-read_only: false
