@@ -1,7 +1,9 @@
 FROM ghcr.io/home-assistant/amd64-base:latest
 
-# Install Python + build deps
-RUN apk add --no-cache python3 py3-pip build-base
+
+# Install Python + build deps + sqlite CLI
+RUN apk add --no-cache python3 py3-pip build-base sqlite
+
 
 WORKDIR /app
 
