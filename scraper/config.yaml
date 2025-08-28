@@ -1,10 +1,11 @@
 name: JobWatcher
-version: "0.1.31"
+version: "0.1.32"
 slug: jobwatcher
 description: Serve jobs.db through a FastAPI and scrape on demand
 arch:
   - amd64
   - aarch64
+init: false
 startup: services
 boot: auto
 ports:
@@ -12,5 +13,4 @@ ports:
 options: {}
 schema: {}
 map:
-  - data:rw
-init: false
+  - share:rw
