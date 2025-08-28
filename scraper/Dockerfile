@@ -1,13 +1,16 @@
-# Use the supported Python base for add-ons
-FROM ghcr.io/home-assistant/amd64-base-python:3.11
+# Use the standard Home Assistant base
+FROM ghcr.io/home-assistant/amd64-base:latest
+
+# Install Python and build tools
+RUN apk add --no-cache python3 py3-pip py3-virtualenv build-base
 
 WORKDIR /app
 
-# Install Python deps
+# Install requirements
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
+RUN pip3 install --no-cache-dir -r requirements.txt fastapi uvicorn
 
-# Copy app files
+# Copy app
 COPY api.py scraper.py scraper_config.yaml /app/
 COPY run.sh /app/
 RUN chmod a+x /app/run.sh
