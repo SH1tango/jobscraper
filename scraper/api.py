@@ -15,6 +15,23 @@ def _like_frag(x: str) -> str:
     # case-insensitive LIKE by using lower() in SQL and lower() terms in params
     return f"%{x.lower()}%"
 
+def init_db():
+    con = sqlite3.connect(DB_PATH)
+    cur = con.cursor()
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS jobs (
+            site TEXT,
+            title TEXT,
+            url TEXT,
+            posted_at TEXT
+        )
+    """)
+    con.commit()
+    con.close()
+
+# Run at startup
+init_db()
+
 @app.get("/jobs")
 def get_jobs(
     year: int | None = None,
