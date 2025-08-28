@@ -1,26 +1,14 @@
-FROM ghcr.io/home-assistant/amd64-base:latest
+FROM ghcr.io/home-assistant/amd64-base-python:3.12-alpine
 
-# system deps
-RUN apk add --no-cache python3 py3-pip libxml2 libxslt \
- && apk add --no-cache --virtual .build-deps gcc musl-dev libxml2-dev libxslt-dev
+# Install uvicorn & fastapi
+RUN pip install --no-cache-dir fastapi uvicorn
 
+# Copy your script
 WORKDIR /app
+COPY api.py /app/
 
-# venv
-RUN python3 -m venv /venv
-ENV PATH="/venv/bin:$PATH"
+# Run script via run.sh
+COPY run.sh /app/
+RUN chmod a+x /app/run.sh
 
-# deps
-COPY requirements.txt .
-RUN /venv/bin/pip install --no-cache-dir -r requirements.txt
-
-# app
-COPY api.py scraper.py /app/
-
-# s6 scripts
-COPY rootfs/ /
-
-# cleanup
-RUN apk del .build-deps
-
-EXPOSE 8001
+CMD ["/app/run.sh"]
