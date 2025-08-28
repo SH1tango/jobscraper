@@ -1,5 +1,5 @@
 name: JobWatcher
-version: "0.1.32"
+version: "0.1.33"
 slug: jobwatcher
 description: Serve jobs.db through a FastAPI and scrape on demand
 arch:
@@ -12,5 +12,3 @@ ports:
   8001/tcp: 8001
 options: {}
 schema: {}
-map:
-  - share:rw
