@@ -19,7 +19,7 @@ COPY api.py /app/
 RUN mkdir -p /etc/services.d/jobwatcher
 
 # Copy service run script into s6 location
-COPY run.sh /etc/services.d/jobwatcher/run
+COPY run /etc/services.d/jobwatcher/run
 RUN chmod +x /etc/services.d/jobwatcher/run
 
 RUN head -1 /etc/services.d/jobwatcher/run && \
@@ -27,3 +27,5 @@ RUN head -1 /etc/services.d/jobwatcher/run && \
 
 RUN echo "== run.sh head ==" && head -5 /etc/services.d/jobwatcher/run
 RUN echo "== run.sh perms ==" && ls -l /etc/services.d/jobwatcher/
+
+RUN echo '#!/bin/sh\nexit 0' > /etc/services.d/jobwatcher/finish && chmod +x /etc/services.d/jobwatcher/finish
