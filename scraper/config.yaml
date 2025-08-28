@@ -1,7 +1,7 @@
-name: "JobWatcher API"
-version: "1.0.16"
-slug: "jobwatcher"
-description: "Custom FastAPI add-on for job listings"
+name: JobWatcher
+version: "0.1.8"
+slug: jobwatcher
+description: Serve jobs.db through a FastAPI and scrape on demand
 arch:
   - amd64
   - aarch64
