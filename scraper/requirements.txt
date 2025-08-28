@@ -1,6 +1,2 @@
 fastapi
 uvicorn
-pyyaml
-requests
-beautifulsoup4
-lxml
