@@ -19,7 +19,7 @@ COPY api.py /app/
 COPY jobs.db /app/
 
 # Create s6 service directory for our app
-RUN mkdir -p /etc/services.d/jobwatcher
+RUN mkdir -p /etc/services.d/jobwatcher/
 
 # Copy service run script into s6 location
 COPY run /etc/services.d/jobwatcher/run
