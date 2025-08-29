@@ -11,6 +11,5 @@ ports:
   8001/tcp: 8001
 options: {}
 schema: {}
-"map": [
-	  "data:rw"
-  ],
+map:
+  - data:rw
