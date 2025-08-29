@@ -3,7 +3,10 @@ import sqlite3
 from fastapi import FastAPI, Query
 from fastapi.responses import JSONResponse, PlainTextResponse
 
-DB_PATH = "/data/jobs.db"
+import os
+
+DB_PATH = os.path.join("/data", "jobs.db")
+
 
 app = FastAPI(title="JobWatcher API")
 

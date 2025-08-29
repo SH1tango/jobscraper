@@ -16,13 +16,16 @@ RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
 
 # Copy app code
 COPY api.py /app/
-COPY jobs.db /app/
+
+# Copy seed DB
+COPY jobs.db /etc/jobserver/seed.db
+
 
 # Create s6 service directory for our app
-RUN mkdir -p /etc/services.d/jobwatcher/
+RUN mkdir -p /etc/services.d/jobwatcher
 
 # Copy service run script into s6 location
-COPY run /etc/services.d/jobwatcher/run
+COPY run.sh /etc/services.d/jobwatcher/run
 RUN chmod +x /etc/services.d/jobwatcher/run
 
 RUN head -1 /etc/services.d/jobwatcher/run && \
