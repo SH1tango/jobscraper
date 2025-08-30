@@ -21,7 +21,6 @@ COPY api.py /app/
 COPY jobs.db /app/
 
 RUN mkdir -p /etc/cont-init.d
-RUN mkdir /data
 COPY 10-debug.sh /etc/cont-init.d/10-debug
 RUN chmod +x /etc/cont-init.d/10-debug
 
@@ -31,6 +30,9 @@ RUN mkdir -p /etc/services.d/jobwatcher
 # Copy service run script into s6 location
 COPY run.sh /etc/services.d/jobwatcher/run
 RUN chmod +x /etc/services.d/jobwatcher/run
+
+
+RUN mkdir -p /data
 
 #RUN apk add --no-cache dos2unix \
  #&& dos2unix /etc/services.d/jobwatcher/run \
