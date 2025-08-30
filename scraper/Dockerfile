@@ -20,12 +20,15 @@ RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
 # Copy seed DB
 #COPY jobs.db /app/
 
+RUN mkdir -p /etc/cont-init.d
+COPY 10-debug.sh /etc/cont-init.d/10-debug
+RUN chmod +x /etc/cont-init.d/10-debug
 
 # Create s6 service directory for our app
 RUN mkdir -p /etc/services.d/jobwatcher
 
 # Copy service run script into s6 location
-#COPY run.sh /etc/services.d/jobwatcher/run
+COPY run.sh /etc/services.d/jobwatcher/run
 
 #RUN apk add --no-cache dos2unix \
  #&& dos2unix /etc/services.d/jobwatcher/run \
