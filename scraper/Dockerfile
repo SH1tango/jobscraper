@@ -21,6 +21,7 @@ COPY api.py /app/
 COPY jobs.db /app/
 
 RUN mkdir -p /etc/cont-init.d
+RUN mkdir /data
 COPY 10-debug.sh /etc/cont-init.d/10-debug
 RUN chmod +x /etc/cont-init.d/10-debug
 
