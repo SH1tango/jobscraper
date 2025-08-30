@@ -1,6 +1,7 @@
 #!/command/with-contenv sh
 set -x
 echo ">>> JobWatcher run script starting..."
+cd /app
 echo "PWD=$(pwd)"
 ls -l /app
 ls -l /data || echo "/data not found"
