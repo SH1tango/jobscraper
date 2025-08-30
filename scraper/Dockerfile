@@ -15,10 +15,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
 
 # Copy app code
-COPY api.py /app/
+#COPY api.py /app/
 
 # Copy seed DB
-COPY jobs.db /app/
+#COPY jobs.db /app/
 
 
 # Create s6 service directory for our app
@@ -27,14 +27,14 @@ RUN mkdir -p /etc/services.d/jobwatcher
 # Copy service run script into s6 location
 COPY run.sh /etc/services.d/jobwatcher/run
 
-RUN apk add --no-cache dos2unix \
- && dos2unix /etc/services.d/jobwatcher/run \
- && chmod +x /etc/services.d/jobwatcher/run \
- && ls -l /etc/services.d/jobwatcher \
- && head -1 /etc/services.d/jobwatcher/run
+#RUN apk add --no-cache dos2unix \
+ #&& dos2unix /etc/services.d/jobwatcher/run \
+ #&& chmod +x /etc/services.d/jobwatcher/run \
+ #&& ls -l /etc/services.d/jobwatcher \
+ #&& head -1 /etc/services.d/jobwatcher/run
 
 
-RUN echo "== run.sh head ==" && head -5 /etc/services.d/jobwatcher/run
-RUN echo "== run.sh perms ==" && ls -l /etc/services.d/jobwatcher/
+#RUN echo "== run.sh head ==" && head -5 /etc/services.d/jobwatcher/run
+#RUN echo "== run.sh perms ==" && ls -l /etc/services.d/jobwatcher/
 
-RUN echo '#!/bin/sh\nexit 0' > /etc/services.d/jobwatcher/finish && chmod +x /etc/services.d/jobwatcher/finish
+#RUN echo '#!/bin/sh\nexit 0' > /etc/services.d/jobwatcher/finish && chmod +x /etc/services.d/jobwatcher/finish
