@@ -11,4 +11,4 @@ echo ">>> Checking DB path..."
 ls -l /data/jobs.db || echo "DB not found"
 
 # Now start uvicorn
-exec /app/venv/bin/uvicorn api:app --host 0.0.0.0 --port 8001
+exec s6-setuidgid root /app/venv/bin/uvicorn api:app --host 0.0.0.0 --port 8001
