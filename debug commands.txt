@@ -25,3 +25,7 @@ docker ps -a | grep jobwatcher
 stop and remove contianers
 docker stop e063c9453561
 docker rm e063c9453561
+
+Run the shell script inside the container through the s6 overlay. this is the proper way of testing if things are running
+docker run -it --rm 19263f11/amd64-addon-jobwatcher:0.1.72\
+  /app/venv/bin/uvicorn api:app --host 0.0.0.0 --port 8001 --no-server-header --log-level debug
