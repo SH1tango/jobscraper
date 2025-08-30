@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
 RUN mkdir -p /etc/services.d/jobwatcher
 
 # Copy service run script into s6 location
-COPY run.sh /etc/services.d/jobwatcher/run
+#COPY run.sh /etc/services.d/jobwatcher/run
 
 #RUN apk add --no-cache dos2unix \
  #&& dos2unix /etc/services.d/jobwatcher/run \
