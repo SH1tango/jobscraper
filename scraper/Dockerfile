@@ -29,6 +29,7 @@ RUN mkdir -p /etc/services.d/jobwatcher
 
 # Copy service run script into s6 location
 COPY run.sh /etc/services.d/jobwatcher/run
+RUN chmod +x /etc/services.d/jobwatcher/run
 
 #RUN apk add --no-cache dos2unix \
  #&& dos2unix /etc/services.d/jobwatcher/run \

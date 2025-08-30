@@ -1,5 +1,5 @@
 #!/command/with-contenv sh
-set -x   # turn on shell debugging (prints each command before running)
+set -x
 echo ">>> JobWatcher run script starting..."
 echo "PWD=$(pwd)"
 ls -l /app

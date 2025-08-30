@@ -1,0 +1,17 @@
+from a ssh terminal
+
+docker run -it --rm 19263f11/amd64-addon-jobwatcher:0.1.xx sh -c "cd /etc/services.d/jobwatcher && ./run"
+
+to manually run the run file in the container. and see its output
+
+
+check mount points
+docker inspect addon_19263f11_jobwatcher | grep -A5 Mounts
+
+
+
+enter the container
+docker run -it --rm --entrypoint sh 19263f11/amd64-addon-jobwatcher:0.1.xx
+
+cd and ls to look around
+cat to open a file
