@@ -15,10 +15,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
 
 # Copy app code
-#COPY api.py /app/
+COPY api.py /app/
 
 # Copy seed DB
-#COPY jobs.db /app/
+COPY jobs.db /app/
 
 RUN mkdir -p /etc/cont-init.d
 COPY 10-debug.sh /etc/cont-init.d/10-debug
