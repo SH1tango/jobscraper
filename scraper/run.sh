@@ -1,3 +1,4 @@
 #!/command/with-contenv sh
-echo ">>> debug sleep so I can inspect"
-sleep 600
+cd /app
+echo ">>> JobWatcher starting..."
+exec /app/venv/bin/uvicorn api:app --host 0.0.0.0 --port 8001

@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn
 COPY api.py /app/
 
 # Copy seed DB
-COPY jobs.db /etc/jobserver/seed.db
+COPY jobs.db /app/
 
 
 # Create s6 service directory for our app
