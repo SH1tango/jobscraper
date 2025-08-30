@@ -15,3 +15,13 @@ docker run -it --rm --entrypoint sh 19263f11/amd64-addon-jobwatcher:0.1.xx
 
 cd and ls to look around
 cat to open a file
+
+list all containers
+docker ps -a
+
+find containers of certain addon
+docker ps -a | grep jobwatcher
+
+stop and remove contianers
+docker stop e063c9453561
+docker rm e063c9453561
